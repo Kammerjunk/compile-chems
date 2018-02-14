@@ -18,9 +18,9 @@ namespace CompileChems {
             string reagentName = Console.ReadLine();
             reagentName = reagentName.ToLower(); //make sure dexalinp isn't DEXALINP or DexalinP
 
-            string patternReagent = "(?<=u of )" + reagentName + "\\b"; // (?<=u of )reagentName\b      matches reagentName after "u of " and not reagentName as a partial word
-            string patternName = "(\\b(?!by)[^\\s]+)$"; // (\b(?!by)[^\s]+)$                            matches 1 word at the end of the string, but not "by"
-            string patternDose = "(?<=\\|\\|\\s)\\d+"; // (?<=\|\|\s)\d+                         matches one or more digits after "|| "
+            string patternReagent = "(?<=u of )" + reagentName + "\\b"; // (?<=u of )reagentName\b  matches reagentName after "u of " and not reagentName as a partial word
+            string patternName = "(\\b(?!by)[^\\s]+)$"; // (\b(?!by)[^\s]+)$                        matches 1 word at the end of the string, but not "by"
+            string patternDose = "(?<=\\|\\|\\s)\\d+"; // (?<=\|\|\s)\d+                            matches one or more digits after "|| "
             Regex rgxReagent = new Regex(patternReagent);
 
             string line;
@@ -32,14 +32,9 @@ namespace CompileChems {
                 if (matchReagent.Success) {
                     //match name
                     name = MatchString(line, patternName);
-                    Console.Write(name);
                     
-                    Console.Write(" has created ");
-
                     //match reagent dose
                     dose = MatchString(line, patternDose);
-                    Console.Write(dose);
-                    Console.Write("u of " + reagentName);
 
                     //add to dic
                     if(Int32.TryParse(dose, out int doseInt)) {
@@ -49,16 +44,15 @@ namespace CompileChems {
                             ckeyDic[name] = ckeyDic[name] + doseInt;
                         }
                     }
-
-                    Console.WriteLine();
                 }
             }
-            Console.WriteLine();
-            foreach(KeyValuePair<string, int> kvp in ckeyDic) {
+            var ordered = ckeyDic.OrderByDescending(x => x.Value); //sort dictionary by amount of reagent created
+            //add gathered dictionary of ckeys vs. created amount to list for writing
+            foreach(KeyValuePair<string, int> kvp in ordered) {
                 resultList.Add($"{kvp.Key} created {kvp.Value}u {reagentName}");
             }
 
-            FileAccessing.WriteToFile(resultList);
+            FileAccessing.WriteToFile(resultList); //write to file
             sr.Close();
             Console.WriteLine("Streams closed. Press any key to exit.");
             Console.ReadKey();
