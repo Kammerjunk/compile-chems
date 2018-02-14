@@ -32,7 +32,6 @@ namespace CompileChems {
                 if (matchReagent.Success) {
                     //match name
                     name = MatchString(line, patternName);
-                    Console.WriteLine(name + ": " + line);
                     
                     //match reagent dose
                     dose = MatchString(line, patternDose);
