@@ -9,13 +9,9 @@ using System.Threading.Tasks;
 namespace CompileChems {
     class Program {
         static void Main(string[] args) {
-            Console.Write("Please enter path of chemistry file in the current directory: ");
-            string filename = Console.ReadLine();
-            string path = Directory.GetCurrentDirectory() + "\\chem_test.txt";
-            Console.WriteLine("Reading from " + path);
-
-            StreamReader sr = new StreamReader(path);
+            StreamReader sr = FileAccessing.GetFilePath();
             Dictionary<string, int> ckeyDic = new Dictionary<string, int>();
+            List<string> resultList = new List<string>();
 
             //ask user for reagent name
             Console.Write("Enter name of reagent as given in Chemistry-Reagents.dm (for example dexalinp): ");
@@ -37,8 +33,6 @@ namespace CompileChems {
                     //match name
                     name = MatchString(line, patternName);
                     Console.Write(name);
-                    //add to dic
-
                     
                     Console.Write(" has created ");
 
@@ -47,11 +41,26 @@ namespace CompileChems {
                     Console.Write(dose);
                     Console.Write("u of " + reagentName);
 
+                    //add to dic
+                    if(Int32.TryParse(dose, out int doseInt)) {
+                        if(!ckeyDic.ContainsKey(name)) {
+                            ckeyDic.Add(name, doseInt);
+                        } else {
+                            ckeyDic[name] = ckeyDic[name] + doseInt;
+                        }
+                    }
+
                     Console.WriteLine();
                 }
             }
+            Console.WriteLine();
+            foreach(KeyValuePair<string, int> kvp in ckeyDic) {
+                resultList.Add($"{kvp.Key} created {kvp.Value}u {reagentName}");
+            }
 
+            FileAccessing.WriteToFile(resultList);
             sr.Close();
+            Console.WriteLine("Streams closed. Press any key to exit.");
             Console.ReadKey();
         }
 
