@@ -32,6 +32,24 @@ namespace CompileChems {
             return null;
         }
 
+        public static string GetFolderPath() {
+            string foldername = null;
+            bool folderFound = false;
+            string path = null;
+
+            Console.Write("Enter name of folder in the current directory containing chemistry log files: ");
+            while(!folderFound) {
+                foldername = Console.ReadLine();
+                path = Directory.GetCurrentDirectory() + $"\\{foldername}";
+                if(!Directory.Exists(path)) {
+                    Console.Write("Unable to locate folder. Please enter folder name: ");
+                } else {
+                    folderFound = true;
+                }
+            }
+            return path;
+        }
+
         public static void WriteToFile(List<string> resultList) {
             Console.Write("Enter filename to write result to: ");
             string filename = Console.ReadLine();
