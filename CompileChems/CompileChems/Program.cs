@@ -18,9 +18,9 @@ namespace CompileChems {
             string reagentName = Console.ReadLine();
             reagentName = reagentName.ToLower(); //make sure dexalinp isn't DEXALINP or DexalinP
 
-            string patternReagent = "(?<=u of )" + reagentName + "\\b"; // (?<=u of )reagentName\b  matches reagentName after "u of " and not reagentName as a partial word
-            string patternName = "(\\b(?!by)[^\\s]+)$"; // (\b(?!by)[^\s]+)$                        matches 1 word at the end of the string, but not "by"
-            string patternDose = "(?<=\\|\\|\\s)\\d+"; // (?<=\|\|\s)\d+                            matches one or more digits after "|| "
+            string patternReagent = "(?<=u of )" + reagentName + " have been"; // (?<=u of )reagentName have been   matches to "u of " and "reagentname" and "have been" in order
+            string patternName = "(?<=last touched by ).+$"; // (?<=last touched by ).+$                            matches 1 or more chars at the end of the string after "last touched by "
+            string patternDose = "(?<=\\|\\|\\s)\\d+"; // (?<=\|\|\s)\d+                                            matches one or more digits after "|| "
             Regex rgxReagent = new Regex(patternReagent);
 
             string line;
@@ -32,6 +32,7 @@ namespace CompileChems {
                 if (matchReagent.Success) {
                     //match name
                     name = MatchString(line, patternName);
+                    Console.WriteLine(name + ": " + line);
                     
                     //match reagent dose
                     dose = MatchString(line, patternDose);
