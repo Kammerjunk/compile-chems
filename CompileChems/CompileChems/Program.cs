@@ -12,16 +12,15 @@ namespace CompileChems {
             bool run = true;
             while (run) {
                 ChemCompiler.CompileChems();
-
+                Console.WriteLine();
+                
+                Console.Write("Do you wish to run a compilation again? Y/N");
                 ConsoleKey response;
                 do {
-                    Console.Write("Do you wish to run a compilation again? Y/N");
-                    response = Console.ReadKey(false).Key;
-                    if(response != ConsoleKey.Enter) {
-                        Console.WriteLine();
-                    }
+                    response = Console.ReadKey(true).Key;
                 } while (response != ConsoleKey.Y && response != ConsoleKey.N);
                 run = response == ConsoleKey.Y;
+                Console.WriteLine();
             }
             Console.WriteLine("Loop terminated. Press any key to exit.");
             Console.ReadKey();
