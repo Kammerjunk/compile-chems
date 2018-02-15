@@ -54,7 +54,7 @@ namespace CompileChems.ChemCompiler {
                 line = FileAccessing.HtmlToPlainText(line);
                 Match matchReagent = rgxReagent.Match(line);
                 if (matchReagent.Success) {
-                    _name = MatchString(line, patternName); //match name
+                    _name = MatchString(line, patternName).ToLower(); //match name
                     _dose = MatchString(line, patternDose); //match reagent dose
 
                     //add to dic

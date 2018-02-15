@@ -73,6 +73,7 @@
     <Compile Include="ChemCompiler\ChemCompilerBase.cs" />
     <Compile Include="ChemCompiler\ChemCompilerFile.cs" />
     <Compile Include="ChemCompiler\ChemCompilerFolder.cs" />
+    <Compile Include="ChemCompiler\ICompileChems.cs" />
     <Compile Include="FileAccessing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

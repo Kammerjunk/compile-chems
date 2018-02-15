@@ -30,15 +30,16 @@ namespace CompileChems.ChemCompiler {
             //process reagents
             DoLines(_reagentName, _sr);
             _sr.Close();
+            Console.WriteLine("Streams closed.");
 
             DictionaryToOrderedList();
+            //write to file
+            FileAccessing.WriteToFile(_resultList);
 
             //empty used collections
             EmptyCollections();
 
-            //write to file
-            FileAccessing.WriteToFile(_resultList);
-            Console.WriteLine("Streams closed.");
+            Console.WriteLine("File written.");
         }
     }
 }
