@@ -7,6 +7,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CompileChems {
+    /// <summary>
+    /// Parent class for classes which must parse strings from /vg/station chemistry logs.
+    /// </summary>
     public class ChemCompilerBase {
         protected Dictionary<string, int> _ckeyDic;
         protected string _name;
@@ -15,11 +18,19 @@ namespace CompileChems {
         protected string _reagentName;
         protected StreamReader _sr;
 
+        /// <summary>
+        /// Initialises a new instance of ChemCompilerBase.
+        /// Initialises the dictionary and list properties.
+        /// </summary>
         protected ChemCompilerBase() {
             _ckeyDic = new Dictionary<string, int>();
             _resultList = new List<string>();
         }
 
+        /// <summary>
+        /// Gets the name of the reagent being searched for through user input, formatted to lowercase.
+        /// </summary>
+        /// <returns>Returns the fully lowercase name of the reagent.</returns>
         protected string GetReagentName() {
             Console.Write("Enter ID of reagent as given in Chemistry-Reagents.dm (for example dexalinp): ");
             string reagentName = Console.ReadLine();
@@ -27,9 +38,14 @@ namespace CompileChems {
             return reagentName;
         }
 
+        /// <summary>
+        /// Searches through files being fed to the StreamReader and adds them to the Dictionary if they match the pattern for reagents being created.
+        /// </summary>
+        /// <param name="reagentName">The reagent being searched for.</param>
+        /// <param name="sr">The StreamReader going through the files.</param>
         protected void DoLines(string reagentName, StreamReader sr) {
             string line;
-            string patternReagent = "(?<=u of )" + reagentName + " have been"; // (?<=u of )reagentName have been               matches to "u of " and "reagentname" and "have been" in order
+            string patternReagent = "(?<=u of )" + reagentName + " have been"; // (?<=u of )reagentName have been               matches to "u of " and "reagentName" and "have been" in order
             string patternName = "((?<=last touched by )|(?<=carried by )).+$"; // ((?<=last touched by )|(?<=carried by )).+$  matches 1 or more chars at the end of the string after "last touched by " OR "carried by "
             string patternDose = "(?<=\\|\\|\\s)\\d+"; // (?<=\|\|\s)\d+                                                        matches one or more digits after "|| "
             Regex rgxReagent = new Regex(patternReagent);
@@ -53,6 +69,10 @@ namespace CompileChems {
             }
         }
 
+        /// <summary>
+        /// Takes the unsorted dictionary with a string key (the ckey/handle creating the reagent) and int value (the amount of the reagent they have created).
+        /// Sorts this dictionary by value in descending order and puts it into the list in a readable format.
+        /// </summary>
         protected void DictionaryToOrderedList() {
             var ordered = _ckeyDic.OrderByDescending(x => x.Value); //sort dictionary by amount of reagent created
             foreach(KeyValuePair<string, int> kvp in ordered) {
@@ -60,6 +80,12 @@ namespace CompileChems {
             }
         }
 
+        /// <summary>
+        /// Flexibly matches a pattern to a string of any length based on given parameters.
+        /// </summary>
+        /// <param name="line">The string being tested.</param>
+        /// <param name="pattern">The regex pattern the line is being tested with.</param>
+        /// <returns>Returns the matched pattern as a string.</returns>
         protected string MatchString(string line, string pattern) {
             Regex rgx = new Regex(pattern);
             string result = null;

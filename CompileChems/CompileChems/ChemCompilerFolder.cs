@@ -7,12 +7,20 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 namespace CompileChems {
+    /// <summary>
+    /// Compiles chemistry logs from an entire folder of .htm or .txt files into a single .txt file.
+    /// </summary>
     public class ChemCompilerFolder : ChemCompilerBase {
+        /// <summary>
+        /// Initialises a new instance of ChemCompilerFolder with an empty dictionary and list.
+        /// </summary>
         public ChemCompilerFolder()
         : base() {
-
         }
 
+        /// <summary>
+        /// Compiles chemistry logs through a StreamReader into a sorted list of strings.
+        /// </summary>
         public void CompileChems() {
             //get folder name and files within from user
             string path = FileAccessing.GetFolderPath();

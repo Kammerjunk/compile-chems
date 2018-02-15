@@ -7,7 +7,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CompileChems {
+    /// <summary>
+    /// Contains a number of methods for interacting with files and preparing for file interaction.
+    /// </summary>
     public static class FileAccessing {
+        /// <summary>
+        /// Gets an absolute path in the current directory from user input.
+        /// </summary>
+        /// <returns>Returns a StreamReader with a valid path to a .htm or .txt file.</returns>
         public static StreamReader GetFilePath() {
             string filename = null;
             bool fileFound = false;
@@ -38,6 +45,10 @@ namespace CompileChems {
             return null;
         }
 
+        /// <summary>
+        /// Gets an absolute path in a direct subdirectory from user input.
+        /// </summary>
+        /// <returns>Returns a string with a subdirectory inside the current directory.</returns>
         public static string GetFolderPath() {
             string foldername = null;
             bool folderFound = false;
@@ -57,6 +68,10 @@ namespace CompileChems {
             return path;
         }
 
+        /// <summary>
+        /// Writes a list to a file in the current directory, named from user input.
+        /// </summary>
+        /// <param name="resultList">A list of pre-formatted strings to print to file.</param>
         public static void WriteToFile(List<string> resultList) {
             Console.Write("Enter filename to write result to: ");
             string filename = Console.ReadLine();
@@ -74,6 +89,11 @@ namespace CompileChems {
             sw.Close();
         }
 
+        /// <summary>
+        /// Converts single-line HTML strings to plaintext.
+        /// </summary>
+        /// <param name="html">A string containing HTML formatting.</param>
+        /// <returns>Returns a plaintext string converted from HTML formatting.</returns>
         public static string HtmlToPlainText(string html) {
             string tagWhitespace = @"(>|$)(\W|\n|\r)+<";        //matches 1 or more whitespace or linebreak characters between > and <
             string stripFormatting = @"<[^>]*(>|$)";            //matches any character between < and >
