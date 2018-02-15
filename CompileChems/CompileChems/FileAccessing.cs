@@ -67,11 +67,5 @@ namespace CompileChems {
             sw.WriteLine();
             sw.Close();
         }
-
-        private static void CheckFileExists(string filename) {
-            if (!filename.EndsWith(".txt")) {
-                filename += ".txt";
-            }
-        }
     }
 }
