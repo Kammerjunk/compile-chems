@@ -22,7 +22,6 @@ namespace CompileChems {
             _reagentName = GetReagentName();
             
             foreach(string file in files) {
-                //string filePath = path + $"{file}";
                 _sr = new StreamReader(file);
                 DoLines(_reagentName, _sr);
                 _sr.Close();
