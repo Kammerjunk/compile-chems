@@ -55,8 +55,8 @@ namespace CompileChems {
         public static void WriteToFile(List<string> resultList) {
             Console.Write("Enter filename to write result to: ");
             string filename = Console.ReadLine();
-            if (!filename.EndsWith(".txt")) {
-                filename += ".txt";
+            if (!filename.EndsWith(".txt") && !filename.EndsWith(".htm") {
+                filename += ".htm";
             }
             Console.WriteLine("Writing to " + filename);
             StreamWriter sw = File.AppendText(filename);
