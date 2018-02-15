@@ -14,7 +14,6 @@ namespace CompileChems {
 
             bool run = true;
             while (run) {
-                //ChemCompiler.CompileChems();
                 Console.WriteLine("Choose how to process file(s).");
                 Console.WriteLine("Accepted responses: folder, file");
                 string responseProcessing;
