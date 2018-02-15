@@ -18,11 +18,17 @@ namespace CompileChems {
                 try {
                     filename = Console.ReadLine();
                     //add file extension if user didn't. will default to .htm
-                    filename = AddFileExtension(filename);
+                    if (!filename.EndsWith(".txt") && !filename.EndsWith(".htm")) {
+                        if (File.Exists($"{filename}.htm")) {
+                            filename += ".htm";
+                        } else {
+                            filename += ".txt";
+                        }
+                    }
                     string path = Directory.GetCurrentDirectory() + $"\\{filename}";
                     sr = new StreamReader(path);
                     Console.WriteLine("Reading from " + path);
-                    fileFound = true;
+                    fileFound = true; //break
                     return sr;
                 } catch (FileNotFoundException) {
                     Console.Write("Unable to locate file in current directory. Please enter filename: ");
@@ -54,7 +60,9 @@ namespace CompileChems {
         public static void WriteToFile(List<string> resultList) {
             Console.Write("Enter filename to write result to: ");
             string filename = Console.ReadLine();
-            filename = AddFileExtension(filename);
+            if (!filename.EndsWith(".txt")) {
+                filename += ".txt";
+            }
             Console.WriteLine("Writing to " + filename);
             StreamWriter sw = File.AppendText(filename);
             sw.AutoFlush = true;
@@ -64,17 +72,6 @@ namespace CompileChems {
             }
             sw.WriteLine();
             sw.Close();
-        }
-
-        private static string AddFileExtension(string filename) {
-            if (!filename.EndsWith(".txt") && !filename.EndsWith(".htm")) {
-                if (File.Exists($"{filename}.htm")) {
-                    filename += ".htm";
-                } else {
-                    filename += ".txt";
-                }
-            }
-            return filename;
         }
 
         public static string HtmlToPlainText(string html) {
