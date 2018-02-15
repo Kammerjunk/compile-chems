@@ -8,6 +8,11 @@ using System.Text.RegularExpressions;
 
 namespace CompileChems {
     public class ChemCompilerFolder : ChemCompilerBase {
+        public ChemCompilerFolder()
+        : base() {
+
+        }
+
         public void CompileChems() {
             //get folder name and files within from user
             string path = FileAccessing.GetFolderPath();

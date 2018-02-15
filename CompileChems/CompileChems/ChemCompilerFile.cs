@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace CompileChems {
     class ChemCompilerFile : ChemCompilerBase {
+        public ChemCompilerFile()
+            : base() {
+
+        }
+
         public void CompileChems() {
             //get file name from user
             StreamReader sr = FileAccessing.GetFilePath();
