@@ -23,6 +23,8 @@ namespace CompileChems {
             DoLines(_reagentName, _sr);
             _sr.Close();
 
+            DictionaryToOrderedList();
+
             //write to file
             FileAccessing.WriteToFile(_resultList);
             Console.WriteLine("Streams closed.");

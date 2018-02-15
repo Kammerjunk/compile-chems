@@ -52,7 +52,7 @@ namespace CompileChems {
             }
         }
 
-        protected void DictionaryToOrderedList(Dictionary<string, int> dictionary) {
+        protected void DictionaryToOrderedList() {
             var ordered = _ckeyDic.OrderByDescending(x => x.Value); //sort dictionary by amount of reagent created
             foreach(KeyValuePair<string, int> kvp in ordered) {
                 _resultList.Add($"{kvp.Key} created {kvp.Value}u {_reagentName}");

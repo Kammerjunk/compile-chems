@@ -26,6 +26,7 @@ namespace CompileChems {
                 DoLines(_reagentName, _sr);
                 _sr.Close();
             }
+            DictionaryToOrderedList();
 
             FileAccessing.WriteToFile(_resultList);
             Console.WriteLine("Streams closed.");
