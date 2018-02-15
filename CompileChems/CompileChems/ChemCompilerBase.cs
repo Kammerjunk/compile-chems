@@ -81,6 +81,14 @@ namespace CompileChems {
         }
 
         /// <summary>
+        /// Empties collections for multiple runs.
+        /// </summary>
+        protected void EmptyCollections() {
+            _ckeyDic.Clear();
+            _resultList.Clear();
+        }
+
+        /// <summary>
         /// Flexibly matches a pattern to a string of any length based on given parameters.
         /// </summary>
         /// <param name="line">The string being tested.</param>

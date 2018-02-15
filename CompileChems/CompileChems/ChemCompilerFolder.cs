@@ -36,6 +36,9 @@ namespace CompileChems {
             }
             DictionaryToOrderedList();
 
+            //empty used collections
+            EmptyCollections();
+
             FileAccessing.WriteToFile(_resultList);
             Console.WriteLine("Streams closed.");
         }
