@@ -35,6 +35,7 @@ namespace CompileChems {
             Regex rgxReagent = new Regex(patternReagent);
 
             while ((line = sr.ReadLine()) != null) {
+                line = FileAccessing.HtmlToPlainText(line);
                 Match matchReagent = rgxReagent.Match(line);
                 if (matchReagent.Success) {
                     _name = MatchString(line, patternName); //match name

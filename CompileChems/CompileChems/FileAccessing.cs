@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CompileChems {
@@ -66,6 +67,23 @@ namespace CompileChems {
             }
             sw.WriteLine();
             sw.Close();
+        }
+
+        public static string HtmlToPlainText(string html) {
+            string tagWhitespace = @"(>|$)(\W|\n|\r)+<";        //matches 1 or more whitespace or linebreak characters between > and <
+            string stripFormatting = @"<[^>]*(>|$)";            //matches any character between < and >
+            //string lineBreak = @"<(br|BR)\s{0,1}\/{0,1}>";    //matches linebreak tags
+            Regex rgxTagWhitespace = new Regex(tagWhitespace);
+            Regex rgxStripFormatting = new Regex(stripFormatting);
+            //Regex rgxLineBreak = new Regex(lineBreak);
+
+            string plaintext = html;
+            plaintext = System.Net.WebUtility.HtmlDecode(plaintext);            //decode html-specific characters
+            plaintext = rgxTagWhitespace.Replace(plaintext, "><");              //remove whitespace or linebreaks between tags
+            //plaintext = rgxLineBreak.Replace(plaintext, Environment.NewLine); //replaces linebreak characters with newlines
+            plaintext = rgxStripFormatting.Replace(plaintext, String.Empty);    //strips formatting
+
+            return plaintext;
         }
     }
 }
