@@ -41,7 +41,7 @@ namespace CompileChems {
             while(!folderFound) {
                 foldername = Console.ReadLine();
                 path = Directory.GetCurrentDirectory() + $"\\{foldername}";
-                Console.WriteLine("Reading from" + path);
+                Console.WriteLine("Reading from " + path);
                 if(!Directory.Exists(path)) {
                     Console.Write("Unable to locate folder. Please enter folder name: ");
                 } else {
