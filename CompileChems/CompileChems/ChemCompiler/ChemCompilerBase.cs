@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace CompileChems {
+namespace CompileChems.ChemCompiler {
     /// <summary>
     /// Parent class for classes which must parse strings from /vg/station chemistry logs.
     /// </summary>

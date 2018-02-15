@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace CompileChems {
+namespace CompileChems.ChemCompiler {
     /// <summary>
     /// Compiles chemistry logs from an entire folder of .htm or .txt files into a single .txt file.
     /// </summary>
-    public class ChemCompilerFolder : ChemCompilerBase {
+    public class ChemCompilerFolder : ChemCompilerBase, ICompileChems {
         /// <summary>
         /// Initialises a new instance of ChemCompilerFolder with an empty dictionary and list.
         /// </summary>

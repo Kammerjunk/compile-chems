@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompileChems {
+namespace CompileChems.ChemCompiler {
     /// <summary>
     /// Compiles chemistry logs from a single .htm or .txt file into a single .txt file.
     /// </summary>
-    class ChemCompilerFile : ChemCompilerBase {
+    class ChemCompilerFile : ChemCompilerBase, ICompileChems {
         /// <summary>
         /// Initialises a new instance of ChemCompilerFile with an empty dictionary and list.
         /// </summary>
