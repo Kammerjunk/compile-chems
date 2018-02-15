@@ -17,9 +17,8 @@ namespace CompileChems {
             while (!fileFound) {
                 try {
                     filename = Console.ReadLine();
-                    if (!filename.EndsWith(".txt")) {
-                        filename += ".txt";
-                    }
+                    //add file extension if user didn't. will default to .htm
+                    filename = AddFileExtension(filename);
                     string path = Directory.GetCurrentDirectory() + $"\\{filename}";
                     sr = new StreamReader(path);
                     Console.WriteLine("Reading from " + path);
@@ -55,9 +54,7 @@ namespace CompileChems {
         public static void WriteToFile(List<string> resultList) {
             Console.Write("Enter filename to write result to: ");
             string filename = Console.ReadLine();
-            if (!filename.EndsWith(".txt")) {
-                filename += ".txt";
-            }
+            filename = AddFileExtension(filename);
             Console.WriteLine("Writing to " + filename);
             StreamWriter sw = File.AppendText(filename);
             sw.AutoFlush = true;
@@ -67,6 +64,17 @@ namespace CompileChems {
             }
             sw.WriteLine();
             sw.Close();
+        }
+
+        private static string AddFileExtension(string filename) {
+            if (!filename.EndsWith(".txt") && !filename.EndsWith(".htm")) {
+                if (File.Exists($"{filename}.htm")) {
+                    filename += ".htm";
+                } else {
+                    filename += ".txt";
+                }
+            }
+            return filename;
         }
 
         public static string HtmlToPlainText(string html) {
