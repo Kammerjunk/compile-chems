@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using CompileChems.RegexHandling;
 
 namespace CompileChems.ChemCompiler {
     /// <summary>
@@ -45,17 +46,14 @@ namespace CompileChems.ChemCompiler {
         /// <param name="sr">The StreamReader going through the files.</param>
         protected void DoLines(string reagentName, StreamReader sr) {
             string line;
-            string patternReagent = "(?<=u of )" + reagentName + " have been"; // (?<=u of )reagentName have been               matches to "u of " and "reagentName" and "have been" in order
-            string patternName = "((?<=last touched by )|(?<=carried by )).+$"; // ((?<=last touched by )|(?<=carried by )).+$  matches 1 or more chars at the end of the string after "last touched by " OR "carried by "
-            string patternDose = "(?<=\\|\\|\\s)\\d+"; // (?<=\|\|\s)\d+                                                        matches one or more digits after "|| "
-            Regex rgxReagent = new Regex(patternReagent);
 
             while ((line = sr.ReadLine()) != null) {
                 line = FileAccessing.HtmlToPlainText(line);
-                Match matchReagent = rgxReagent.Match(line);
-                if (matchReagent.Success) {
-                    _name = MatchString(line, patternName).ToLower(); //match name
-                    _dose = MatchString(line, patternDose); //match reagent dose
+                if (RegexHandler.MatchFilter(line, RegexPatterns.Reagent(reagentName))) {
+                    _name = RegexHandler.MatchCkey(line);
+                    //_name = MatchString(line, patternName).ToLower(); //match name
+                    _dose = RegexHandler.MatchDose(line);
+                    //_dose = MatchString(line, patternDose); //match reagent dose
 
                     //add to dic
                     if (Int32.TryParse(_dose, out int doseInt)) {
