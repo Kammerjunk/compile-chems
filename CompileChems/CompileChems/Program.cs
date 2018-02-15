@@ -9,9 +9,23 @@ using System.Threading.Tasks;
 namespace CompileChems {
     class Program {
         static void Main(string[] args) {
+            ChemCompilerFolder compilerFolder = new ChemCompilerFolder();
+            ChemCompilerFile compilerFile = new ChemCompilerFile();
+
             bool run = true;
             while (run) {
-                ChemCompiler.CompileChems();
+                //ChemCompiler.CompileChems();
+                Console.WriteLine("Choose how to process file(s).");
+                Console.WriteLine("Accepted responses: folder, file");
+                string responseProcessing;
+                do {
+                    responseProcessing = Console.ReadLine();
+                } while (responseProcessing != "folder" && responseProcessing != "file");
+                if(responseProcessing == "folder") {
+                    compilerFolder.CompileChems();
+                } else if(responseProcessing == "file") {
+                    compilerFile.CompileChems();
+                }
                 Console.WriteLine();
                 
                 Console.Write("Do you wish to run a compilation again? Y/N");

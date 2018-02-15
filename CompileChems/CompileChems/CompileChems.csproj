@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChemCompiler.cs" />
+    <Compile Include="ChemCompilerBase.cs" />
+    <Compile Include="ChemCompilerFile.cs" />
+    <Compile Include="ChemCompilerFolder.cs" />
     <Compile Include="FileAccessing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
