@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace CompileChems {
     class ChemCompilerFile : ChemCompilerBase {
         public ChemCompilerFile()
-            : base() {
+        : base() {
 
         }
 
         public void CompileChems() {
             //get file name from user
-            StreamReader sr = FileAccessing.GetFilePath();
+            _sr = FileAccessing.GetFilePath();
 
             //get reagent name from user
             _reagentName = GetReagentName();
